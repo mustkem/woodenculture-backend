@@ -60,12 +60,14 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 
-//mongodb+srv://ship:ship12345@cluster0-r3cso.mongodb.net/blog-post-demo?retryWrites=true&w=majority
+//mongodb+srv://ship:ship12345@cluster0-r3cso.mongodb.net/woodenculture-db?retryWrites=true&w=majority
 //
+
+//mongodb+srv://ship:<password>@cluster0.r3cso.mongodb.net/<dbname>?retryWrites=true&w=majority
 const port  = process.env.PORT || 8080;
 mongoose
   .connect(
-    'mongodb+srv://ship:ship12345@cluster0-r3cso.mongodb.net/blog-post-demo?retryWrites=true&w=majority',
+    'mongodb+srv://ship:ship12345@cluster0-r3cso.mongodb.net/woodenculture-db?retryWrites=true&w=majority',
     { useNewUrlParser: true }
   )
   .then(result => {
