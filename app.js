@@ -4,9 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const cors =  require('cors');
 
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
+const adminRoutes = require('./admin/routes/product');
 
 const app = express();
 
@@ -31,6 +33,8 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+
+
 // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
 app.use(bodyParser.json()); // application/json
 app.use(
@@ -48,12 +52,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.use(cors());
+
 
 app.use('/feed', feedRoutes);
 app.use('/auth', authRoutes);
 
+app.use('/admin', adminRoutes);
+
 app.use((error, req, res, next) => {
-  console.log(error);
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;

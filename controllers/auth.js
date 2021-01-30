@@ -12,14 +12,14 @@ exports.signup = (req, res, next) => {
     error.data = errors.array();
     throw error;
   }
-  const email = req.body.email;
+  const phone_num = req.body.phone_num;
   const name = req.body.name;
   const password = req.body.password;
   bcrypt
     .hash(password, 12)
     .then(hashedPw => {
       const user = new User({
-        email: email,
+        phone_num: phone_num,
         password: hashedPw,
         name: name
       });
@@ -37,13 +37,13 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  const email = req.body.email;
+  const phone_num = req.body.phone_num;
   const password = req.body.password;
   let loadedUser;
-  User.findOne({ email: email })
+  User.findOne({ phone_num: phone_num })
     .then(user => {
       if (!user) {
-        const error = new Error('A user with this email could not be found.');
+        const error = new Error('A user could not be found.');
         error.statusCode = 401;
         throw error;
       }
@@ -58,7 +58,7 @@ exports.login = (req, res, next) => {
       }
       const token = jwt.sign(
         {
-          email: loadedUser.email,
+          phone_num: loadedUser.phone_num,
           userId: loadedUser._id.toString()
         },
         'somesupersecretsecret',

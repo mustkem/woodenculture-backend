@@ -10,17 +10,20 @@ const router = express.Router();
 router.put(
   '/signup',
   [
-    body('email')
-      .isEmail()
-      .withMessage('Please enter a valid email.')
-      .custom((value, { req }) => {
-        return User.findOne({ email: value }).then(userDoc => {
-          if (userDoc) {
-            return Promise.reject('E-Mail address already exists!');
-          }
-        });
-      })
-      .normalizeEmail(),
+    // body('email')
+    //   .isEmail()
+    //   .withMessage('Please enter a valid email.')
+    //   .custom((value, { req }) => {
+    //     return User.findOne({ email: value }).then(userDoc => {
+    //       if (userDoc) {
+    //         return Promise.reject('E-Mail address already exists!');
+    //       }
+    //     });
+    //   })
+    //   .normalizeEmail(),
+    body('phone_num')
+      .trim()
+      .isLength({ min: 10, max:10 }),
     body('password')
       .trim()
       .isLength({ min: 5 }),
