@@ -1,15 +1,13 @@
 const projectSchema = {
-  products:[{
-    "title":"",
-    "description":"",
-    "features":[
-      {"title":"","desc":""}
-    ],
-    "images":[{"url":""}],
-    "categories":[
-      {"id":"vanilla"}
-    ]
-  }],
+  products: [
+    {
+      title: "aa",
+      description: "aa",
+      features: [{ title: "a", desc: "a" }],
+      images: [{ url: "a" }],
+      categories: [{ id: "aa" }],
+    },
+  ],
   categories: [
     {
       id: "",
@@ -25,3 +23,16 @@ many to many relashionship- save id in both docs
 
 main menu is a object with nested data which is used tocreate header
 */
+
+const menu = [
+  {
+    title: "aa",
+    cateId:"",
+    categories: [
+      {
+        title: "aa",
+        cateId: "ddd",
+      },
+    ],
+  },
+];

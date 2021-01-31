@@ -8,6 +8,8 @@ const cors =  require('cors');
 
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
+const authCommon = require('./routes/common');
+
 const adminRoutes = require('./admin/routes/product');
 
 const app = express();
@@ -57,6 +59,8 @@ app.use((req, res, next) => {
 
 app.use('/feed', feedRoutes);
 app.use('/auth', authRoutes);
+app.use('/common', authCommon);
+
 
 app.use('/admin', adminRoutes);
 
@@ -81,5 +85,6 @@ mongoose
     app.listen(port, ()=>{
       console.log("**********Running on***********", port)
     });
+    return result;
   })
   .catch(err => console.log("********Error in connection********",err));
