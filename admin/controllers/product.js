@@ -7,6 +7,8 @@ const Post = require("../../models/post");
 const User = require("../../models/user");
 
 const Product = require("../../models/product");
+const Category = require("../../models/common");
+
 
 exports.createProduct = (req, res, next) => {
   const errors = validationResult(req);
@@ -33,6 +35,20 @@ exports.createProduct = (req, res, next) => {
         message: 'Product created successfully!',
         product: result,
       });
+      return result;
+    })
+    .then(product=>{
+      //save product in category
+
+      req.body.categories && req.body.categories.forEach(item=>{
+        //item.cateId
+        Category.findById(item.cateId)
+        .then(category=>{
+          category.products.push(product._id);
+          category.save();
+        })
+      })
+
     })
     .catch(err => {
       if (!err.statusCode) {
