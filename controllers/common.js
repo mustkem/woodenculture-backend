@@ -1,8 +1,9 @@
-const MainMenu = require('../models/common');
-const Cateory = require('../models/common');
+const MainMenu = require('../models/mainMenu');
+const Cateory = require('../models/category');
 
 
 exports.getMainMenu = (req, res, next) => {
+  console.log("test",MainMenu)
   MainMenu.find()
     .then(response => {
       res.status(200).json({

@@ -7,7 +7,7 @@ const Post = require("../../models/post");
 const User = require("../../models/user");
 
 const Product = require("../../models/product");
-const Category = require("../../models/common");
+const Category = require("../../models/category");
 
 
 exports.createProduct = (req, res, next) => {
