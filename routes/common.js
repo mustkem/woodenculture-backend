@@ -26,10 +26,12 @@ router.post(
 
 // GET /feed/posts
 router.get('/categories', 
-isAuth, 
+// isAuth, 
 feedController.getCategories);
 
-router.get('/category/:cate', isAuth, feedController.getCategory);
+router.get('/category/:cate', 
+// isAuth,
+ feedController.getCategory);
 
 
 module.exports = router;
