@@ -21,6 +21,7 @@ router.get('/products', isAuth, feedController.getProducts);
 
 router.get('/product/:productId', isAuth, feedController.getProduct);
 
+
 router.put(
   '/product/:prouctId',
   isAuth,

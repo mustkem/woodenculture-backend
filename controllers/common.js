@@ -1,5 +1,7 @@
 const MainMenu = require('../models/mainMenu');
 const Cateory = require('../models/category');
+const Product = require('../models/product');
+
 
 
 exports.getMainMenu = (req, res, next) => {
@@ -75,6 +77,28 @@ exports.getCategories = (req, res, next) => {
         message: 'Fetched category.',
         categories:response,
       });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+
+exports.getCategory = (req, res, next) => {
+  const cateId = req.params.cateId;
+  Cateory.findById(cateId)
+    .populate("products")
+    .then(category => {
+      if (!category) {
+        const error = new Error('Could not find post.');
+        error.statusCode = 404;
+        throw error;
+      }
+      
+      res.status(200).json({ message: 'Products fetched.', products: category.products });
     })
     .catch(err => {
       if (!err.statusCode) {

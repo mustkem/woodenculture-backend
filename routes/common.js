@@ -29,4 +29,7 @@ router.get('/categories',
 isAuth, 
 feedController.getCategories);
 
+router.get('/category/:cateId', isAuth, feedController.getCategory);
+
+
 module.exports = router;
