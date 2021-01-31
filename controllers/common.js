@@ -88,12 +88,12 @@ exports.getCategories = (req, res, next) => {
 
 
 exports.getCategory = (req, res, next) => {
-  const cateId = req.params.cateId;
-  Cateory.findById(cateId)
+  const cate = req.params.cate;
+  Cateory.findOne({value: cate})
     .populate("products")
     .then(category => {
       if (!category) {
-        const error = new Error('Could not find post.');
+        const error = new Error('Could not find.');
         error.statusCode = 404;
         throw error;
       }
