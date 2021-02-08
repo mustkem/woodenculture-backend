@@ -53,7 +53,7 @@ exports.login = (req, res, next) => {
     .then((isEqual) => {
       if (!isEqual) {
         const error = new Error("Wrong password!");
-        error.statusCode = 401;
+        error.statusCode = 401;  
         throw error;
       }
       const token = jwt.sign(
@@ -64,7 +64,13 @@ exports.login = (req, res, next) => {
         "somesupersecretsecret",
         { expiresIn: "1h" }
       );
-      res.status(200).json({ token: token, userId: loadedUser._id.toString() });
+      res
+        .status(200)
+        .json({
+          token: token,
+          userId: loadedUser._id.toString(),
+          user: loadedUser,
+        });
     })
     .catch((err) => {
       if (!err.statusCode) {
@@ -82,7 +88,7 @@ exports.getUserStatus = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      res.status(200).json({ status: user.status });
+      res.status(200).json({ status: user.status, user });
     })
     .catch((err) => {
       if (!err.statusCode) {
