@@ -40,15 +40,15 @@ router.post('/login', authController.login);
 router.get('/status', isAuth, authController.getUserStatus);
 
 router.patch(
-  '/status',
+  '/user/update',
   isAuth,
-  [
-    body('status')
-      .trim()
-      .not()
-      .isEmpty()
-  ],
-  authController.updateUserStatus
+  authController.updateUser
+);
+
+router.patch(
+  '/user/wishlist',
+  isAuth,
+  authController.updateWishlist
 );
 
 module.exports = router;

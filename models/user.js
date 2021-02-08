@@ -1,29 +1,34 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   phone_num: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   status: {
     type: String,
-    default: 'I am new!'
+    default: "true",
   },
-  posts: [
+  wishlist: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Post'
-    }
-  ]
+      productId:{
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+      },
+      status:{
+        type:Boolean,
+      }
+    },
+  ],
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
