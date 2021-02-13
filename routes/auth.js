@@ -51,4 +51,10 @@ router.patch(
   authController.updateWishlist
 );
 
+router.get(
+  '/user/wishlist',
+  isAuth,
+  authController.getWishlist
+);
+
 module.exports = router;
