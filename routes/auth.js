@@ -57,4 +57,12 @@ router.get(
   authController.getWishlist
 );
 
+
+router.post(
+  '/user/query',
+  isAuth,
+  authController.addQuery
+);
+
+
 module.exports = router;

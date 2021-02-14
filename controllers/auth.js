@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
+const Query = require("../models/query")
 
 exports.signup = (req, res, next) => {
   const errors = validationResult(req);
@@ -186,6 +187,33 @@ exports.getWishlist = (req, res, next) => {
     })
     
     .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+
+exports.addQuery = (req, res, next) => {
+
+  const payload = {
+    note: req.body.note,
+    product: req.body.productId,
+    user: req.userId,
+  };
+
+  const query = new Query(payload);
+
+  query
+    .save()
+    .then(result => {
+      res.status(201).json({
+        message: 'Added successfully!',
+      });
+      return result;
+    })
+    .catch(err => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }
