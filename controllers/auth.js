@@ -220,3 +220,34 @@ exports.addQuery = (req, res, next) => {
       next(err);
     });
 };
+
+exports.getQueries = (req, res, next) => {
+
+  Query.find()
+    .populate( {
+      path: 'product',
+      model: 'Product'
+    })
+    .populate({
+      path: 'user',
+      model: 'User'
+    })
+    .then((queries) => {
+      if (!queries) {
+        const error = new Error("User not found.");
+        error.statusCode = 404;
+        throw error;
+      }
+
+      res.status(200).json({ queries });
+
+      return user.save();
+    })
+    
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};

@@ -64,5 +64,11 @@ router.post(
   authController.addQuery
 );
 
+router.get(
+  '/user/queries',
+  isAuth,
+  authController.getQueries
+);
+
 
 module.exports = router;

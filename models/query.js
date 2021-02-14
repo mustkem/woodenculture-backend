@@ -13,6 +13,10 @@ const querySchema = new Schema({
   user:{
     type: mongoose.Schema.Types.ObjectId,
     ref:"User",
+  },
+  active:{
+    type:Boolean,
+    default:true
   }
 });
 
