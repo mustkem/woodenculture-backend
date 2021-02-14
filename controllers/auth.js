@@ -200,6 +200,7 @@ exports.addQuery = (req, res, next) => {
   const payload = {
     note: req.body.note,
     product: req.body.productId,
+    phoneNum:req.body.phoneNum,
     user: req.userId,
   };
 

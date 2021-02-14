@@ -14,6 +14,9 @@ const querySchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref:"User",
   },
+  phoneNum:{
+    type:Number,
+  },
   active:{
     type:Boolean,
     default:true

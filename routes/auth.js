@@ -60,7 +60,6 @@ router.get(
 
 router.post(
   '/user/query',
-  isAuth,
   authController.addQuery
 );
 
