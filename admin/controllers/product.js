@@ -29,6 +29,7 @@ exports.createProduct = (req, res, next) => {
     };
   });
 
+
   const payload = {
     title: req.body.title,
     description: req.body.description,
@@ -52,7 +53,7 @@ exports.createProduct = (req, res, next) => {
       //save product in category
 
       req.body.categories &&
-        req.body.categories.forEach((item) => {
+      JSON.parse(req.body.categories).forEach((item) => {
           //item.cateId
           Category.findById(item.cateId).then((category) => {
             category.products.push(product._id);
