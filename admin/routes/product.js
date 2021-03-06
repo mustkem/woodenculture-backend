@@ -9,11 +9,11 @@ const router = express.Router();
 router.post(
     '/product',
     isAuth,
-    [
-      body('title')
-        .trim()
-        .isLength({ min: 1 }),
-    ],
+    // [
+    //   body('title')
+    //     .trim()
+    //     .isLength({ min: 1 }),
+    // ],
     feedController.createProduct
   );
 

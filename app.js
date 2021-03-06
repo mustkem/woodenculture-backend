@@ -14,6 +14,16 @@ const adminRoutes = require('./admin/routes/product');
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'OPTIONS, GET, POST, PUT, PATCH, DELETE'
+  );
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'images');
@@ -36,23 +46,20 @@ const fileFilter = (req, file, cb) => {
 };
 
 
-
 // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
 app.use(bodyParser.json()); // application/json
+
 app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
-);
+  multer({ storage: fileStorage, fileFilter: fileFilter }).array('images', 25) 
+);  
+
+// app.use(
+//   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')); 
+ 
+
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'OPTIONS, GET, POST, PUT, PATCH, DELETE'
-  );
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+
 
 // app.use(cors());
 
@@ -68,6 +75,7 @@ app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
+  console.log(error)  
   res.status(status).json({ message: message, data: data });
 });
 

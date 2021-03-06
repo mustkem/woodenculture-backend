@@ -11,6 +11,7 @@ const Category = require("../../models/category");
 
 
 exports.createProduct = (req, res, next) => {
+  
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error("Validation failed, entered data is incorrect.");
@@ -18,12 +19,22 @@ exports.createProduct = (req, res, next) => {
     throw error;
   }
 
+  if (!req.files) {
+    const error = new Error("Validation failed, entered data is incorrect.");
+    error.statusCode = 422;
+    throw error;
+  }
+
+  const images = req.files.map(file=>{
+    return { url: "images/"+new Date().toISOString() + '-' + file.originalname};
+  });
+
   const payload = {
     title: req.body.title,
     description: req.body.description,
-    features: req.body.features,
-    images: req.body.images,
-    categories: req.body.categories,
+    features: JSON.parse(req.body.features),
+    images: images,
+    categories: JSON.parse(req.body.categories),
   };
 
   const product = new Product(payload);
@@ -56,6 +67,7 @@ exports.createProduct = (req, res, next) => {
       }
       next(err);
     });
+  
 
 };
 
