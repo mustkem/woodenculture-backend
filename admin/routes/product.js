@@ -9,11 +9,11 @@ const router = express.Router();
 router.post(
     '/product',
     isAuth,
-    // [
-    //   body('title')
-    //     .trim()
-    //     .isLength({ min: 1 }),
-    // ],
+    [
+      body('title')
+        .trim()
+        .isLength({ min: 1 }),
+    ],
     feedController.createProduct
   );
 
@@ -23,16 +23,8 @@ router.get('/product/:productId', isAuth, feedController.getProduct);
 
 
 router.put(
-  '/product/:prouctId',
+  '/product/:productId',
   isAuth,
-  [
-    body('title')
-      .trim()
-      .isLength({ min: 5 }),
-    body('content')
-      .trim()
-      .isLength({ min: 5 })
-  ],
   feedController.updateProduct
 );
 
