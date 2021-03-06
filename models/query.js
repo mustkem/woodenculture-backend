@@ -17,6 +17,9 @@ const querySchema = new Schema({
   phoneNum:{
     type:Number,
   },
+  type:{
+    type:String
+  },
   active:{
     type:Boolean,
     default:true

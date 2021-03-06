@@ -202,6 +202,7 @@ exports.addQuery = (req, res, next) => {
     product: req.body.productId,
     phoneNum:req.body.phoneNum,
     user: req.userId,
+    type: req.body.type
   };
 
   const query = new Query(payload);
