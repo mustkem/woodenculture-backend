@@ -29,7 +29,6 @@ exports.createProduct = (req, res, next) => {
     };
   });
 
-
   const payload = {
     title: req.body.title,
     description: req.body.description,
