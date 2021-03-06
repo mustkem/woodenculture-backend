@@ -25,7 +25,7 @@ exports.createProduct = (req, res, next) => {
 
   const images = req.files.map((file) => {
     return {
-      url: "images/" + new Date().toISOString() + "-" + file.originalname,
+      url: file.path,
     };
   });
 
