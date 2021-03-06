@@ -21,7 +21,11 @@ const productSchema = new Schema(
     ],
     categories:[{
         cateId:String
-    }]
+    }],
+    active:{
+      type:Boolean,
+      default:false
+    }
   },
   { timestamps: true }
 );
