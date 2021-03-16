@@ -11,6 +11,7 @@ const authRoutes = require('./routes/auth');
 const authCommon = require('./routes/common');
 
 const adminRoutes = require('./admin/routes/product');
+const adminAuthRoutes = require('./admin/routes/adminAuth');
 
 const app = express();
 
@@ -70,6 +71,7 @@ app.use('/common', authCommon);
 
 
 app.use('/admin', adminRoutes);
+app.use('/admin/auth', adminAuthRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
