@@ -43,7 +43,7 @@ exports.login = (req, res, next) => {
   const phone = req.body.phone;
   const password = req.body.password;
   let loadedUser;
-  User.findOne({ phone: phone })
+  AdminUser.findOne({ phone: phone })
     .then((user) => {
       if (!user) {
         const error = new Error("A user could not be found.");
@@ -84,7 +84,7 @@ exports.login = (req, res, next) => {
 };
 
 exports.getUserStatus = (req, res, next) => {
-  User.findById(req.userId)
+  AdminUser.findById(req.userId)
     .then((user) => {
       if (!user) {
         const error = new Error("User not found.");
@@ -103,7 +103,7 @@ exports.getUserStatus = (req, res, next) => {
 
 exports.updateUser = (req, res, next) => {
   const newStatus = req.body.user;
-  User.findById(req.userId)
+  AdminUser.findById(req.userId)
     .then((user) => {
       if (!user) {
         const error = new Error("User not found.");
