@@ -51,6 +51,7 @@ exports.createCategory = (req, res, next) => {
   const payload = {
     title: req.body.title,
     products:req.body.products,
+    value:req.body.value
   };
   const category = new Cateory(payload);
   category

@@ -10,7 +10,11 @@ const categorySchema = new Schema(
     products:[{
       type: mongoose.Schema.Types.ObjectId,
       ref:"Product",
-    }]
+    }],
+    value:{
+      type: String,
+      required: true
+    },
 
   },
   { timestamps: true }
